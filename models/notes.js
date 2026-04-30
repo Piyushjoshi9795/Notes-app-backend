@@ -7,7 +7,7 @@ const NotesSchema= new mongoose.Schema({
         trim: true,
         maxlength: 100,
     },
-    Body :{
+    body :{
         type: String,
         required:true,
 
@@ -15,4 +15,6 @@ const NotesSchema= new mongoose.Schema({
 },{ 
   collection: 'my_personal_notes', 
   timestamps: true 
-})
+});
+
+module.exports=mongoose.model('Note',NotesSchema);
