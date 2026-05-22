@@ -1,5 +1,6 @@
-const Note=require('../models/Note');
+const Note=require('../models/notes');
 
+// GET /api/notes
 const getAllNotes= async(req,res,next)=>{
     try{
         const allNotes= await Note.find().sort({createdAt:-1});
@@ -10,6 +11,7 @@ const getAllNotes= async(req,res,next)=>{
         next(err);
     }
 }
+// POST /api/notess
 
 const createNote=async(req,res,next)=>{
 
@@ -23,6 +25,7 @@ const createNote=async(req,res,next)=>{
     }
 
 }
+// GET /api/notes/:id
 
 const getNoteById=async(req,res,next)=>{
 
@@ -39,15 +42,7 @@ const getNoteById=async(req,res,next)=>{
     }
 }
 
-const updateNote=async(req,res,next)=>{
 
-    try{
-
-    }
-    catch(err){
-        next(err);
-    }
-}
 
 // PUT /api/notes/:id
 const updateNote = async (req, res, next) => {
@@ -67,11 +62,12 @@ const updateNote = async (req, res, next) => {
     next(error);
   }
 }
+// DELETE /api/notes/:id
 
 const deleteNote=async(req,res,next)=>{
 
     try{
-        const note =await Note.findByIdAndDelete(req,params.id);
+        const note =await Note.findByIdAndDelete(req.params.id);
         if(!note){
             return res.status(404).json({success:false,message:'Note not found'});
         }
@@ -81,3 +77,5 @@ const deleteNote=async(req,res,next)=>{
         next(err);
     }
 }
+
+module.exports={getAllNotes,createNote,getNoteById,updateNote,deleteNote};
